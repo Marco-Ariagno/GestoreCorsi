@@ -10,15 +10,18 @@ public class Model {
 	private CorsoDAO dao;
 	
 	public Model() {
-		dao = new CorsoDAO();
+		dao=new CorsoDAO();
 	}
 	
-	public List<Corso> getCorsiByPeriodo(Integer pd){
+	public List<Corso> getCorsiByPeriodo(int pd){
 		return dao.getCorsiByPeriodo(pd);
+		
+		//CorsoDAO gestisce interazione con il DB
+		//Model richiama dao per fornire dati al controller
 	}
 	
-
-	public Map<Corso,Integer> getIscrittiByPeriodo(Integer pd){
+	public Map<Corso,Integer> getIscrittiByPeriodo(int pd){
 		return dao.getIscrittiByPeriodo(pd);
 	}
+
 }

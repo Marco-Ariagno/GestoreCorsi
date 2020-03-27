@@ -15,15 +15,15 @@ public class EntryPoint extends Application {
     @Override
     public void start(Stage stage) throws Exception {
     	
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Scene.fxml"));
+    	FXMLLoader loader=new FXMLLoader(getClass().getResource("/fxml/Scene.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         
-        Model model = new Model();
-        FXMLController controller = loader.getController();
+        Model model=new Model();
+        FXMLController controller=loader.getController();
         controller.setModel(model);
-        
-        stage.setTitle("Gestore Corsi");
+
+        stage.setTitle("Gestore corsi");
         stage.setScene(scene);
         stage.show();
     }
@@ -36,8 +36,7 @@ public class EntryPoint extends Application {
      *
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        launch(args);
-    }
-
+   public static void main(String[] args) {
+	   launch(args);
+   }
 }

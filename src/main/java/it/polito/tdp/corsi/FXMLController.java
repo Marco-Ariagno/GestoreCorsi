@@ -1,7 +1,3 @@
-/**
- * Sample Skeleton for 'Scene.fxml' Controller Class
- */
-
 package it.polito.tdp.corsi;
 
 import java.net.URL;
@@ -21,86 +17,77 @@ public class FXMLController {
 
 	private Model model;
 	
-    @FXML // ResourceBundle that was given to the FXMLLoader
+    @FXML
     private ResourceBundle resources;
 
-    @FXML // URL location of the FXML file that was given to the FXMLLoader
+    @FXML
     private URL location;
 
-    @FXML // fx:id="txtPeriodo"
-    private TextField txtPeriodo; // Value injected by FXMLLoader
+    @FXML
+    private TextField txtPeriodo;
 
-    @FXML // fx:id="txtCorso"
-    private TextField txtCorso; // Value injected by FXMLLoader
+    @FXML
+    private TextField txtCorso;
 
-    @FXML // fx:id="btnCorsiPerPeriodo"
-    private Button btnCorsiPerPeriodo; // Value injected by FXMLLoader
+    @FXML
+    private Button btnCorsiPerPeriodo;
 
-    @FXML // fx:id="btnNumeroStudenti"
-    private Button btnNumeroStudenti; // Value injected by FXMLLoader
+    @FXML
+    private Button btnStudenti;
 
-    @FXML // fx:id="btnStudenti"
-    private Button btnStudenti; // Value injected by FXMLLoader
+    @FXML
+    private Button btnNumeroStudenti;
 
-    @FXML // fx:id="btnDivisioneStudenti"
-    private Button btnDivisioneStudenti; // Value injected by FXMLLoader
+    @FXML
+    private Button btnDivisioneStudenti;
 
-    @FXML // fx:id="txtRisultato"
-    private TextArea txtRisultato; // Value injected by FXMLLoader
+    @FXML
+    private TextArea txtRisultato;
 
     @FXML
     void corsiPerPeriodo(ActionEvent event) {
     	txtRisultato.clear();
-    	
     	String pdString = txtPeriodo.getText();
-
-    	Integer pd;
-
+    	int pd;
     	try {
-    		pd = Integer.parseInt(pdString);
-    	} catch (NumberFormatException e) {
-    		txtRisultato.setText("Devi inserire un numero (1 o 2)!");
+    	pd=Integer.parseInt(pdString);}
+    	catch(NumberFormatException e) {
+    		txtRisultato.appendText("Devi inserire un numero");
+    		return;
+    	}
+    	if(pd!=1 && pd!=2) {
+    		txtRisultato.appendText("Periodo non esistente");
     		return;
     	}
     	
-    	if(!pd.equals(1) && !pd.equals(2)) {
-    		txtRisultato.setText("Devi inserire un numero (1 o 2)!");
-    		return;
+    	//Input corretto
+    	List<Corso> corsi=this.model.getCorsiByPeriodo(pd);
+    	for(Corso c:corsi) {
+    		txtRisultato.appendText(c.toString()+"\n");
     	}
     	
-    	//l'input è corretto
-    	List<Corso> corsi = this.model.getCorsiByPeriodo(pd);
-    	for(Corso c : corsi) {
-    		txtRisultato.appendText(c.toString() + "\n");
-    	}
-
     }
 
     @FXML
     void numeroStudenti(ActionEvent event) {
     	txtRisultato.clear();
-    	
     	String pdString = txtPeriodo.getText();
-
-    	Integer pd;
-
+    	int pd;
     	try {
-    		pd = Integer.parseInt(pdString);
-    	} catch (NumberFormatException e) {
-    		txtRisultato.setText("Devi inserire un numero (1 o 2)!");
+    	pd=Integer.parseInt(pdString);}
+    	catch(NumberFormatException e) {
+    		txtRisultato.appendText("Devi inserire un numero");
     		return;
     	}
-    	
-    	if(!pd.equals(1) && !pd.equals(2)) {
-    		txtRisultato.setText("Devi inserire un numero (1 o 2)!");
+    	if(pd!=1 && pd!=2) {
+    		txtRisultato.appendText("Periodo non esistente");
     		return;
     	}
-    	
-    	Map<Corso, Integer> statistiche = this.model.getIscrittiByPeriodo(pd);
-    	
-    	for(Corso c : statistiche.keySet()) {
-    		txtRisultato.appendText(c.getNome() + " " + statistiche.get(c) + "\n");
+    	Map<Corso,Integer> statistiche=this.model.getIscrittiByPeriodo(pd);
+    	for(Corso c:statistiche.keySet()) {
+    		txtRisultato.appendText(c.getNome()+" "+statistiche.get(c)+"\n");
     	}
+
     }
 
     @FXML
@@ -110,24 +97,21 @@ public class FXMLController {
 
     @FXML
     void stampaStudenti(ActionEvent event) {
-
     }
 
-    @FXML // This method is called by the FXMLLoader when initialization is complete
+    @FXML
     void initialize() {
         assert txtPeriodo != null : "fx:id=\"txtPeriodo\" was not injected: check your FXML file 'Scene.fxml'.";
         assert txtCorso != null : "fx:id=\"txtCorso\" was not injected: check your FXML file 'Scene.fxml'.";
         assert btnCorsiPerPeriodo != null : "fx:id=\"btnCorsiPerPeriodo\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert btnNumeroStudenti != null : "fx:id=\"btnNumeroStudenti\" was not injected: check your FXML file 'Scene.fxml'.";
         assert btnStudenti != null : "fx:id=\"btnStudenti\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert btnNumeroStudenti != null : "fx:id=\"btnNumeroStudenti\" was not injected: check your FXML file 'Scene.fxml'.";
         assert btnDivisioneStudenti != null : "fx:id=\"btnDivisioneStudenti\" was not injected: check your FXML file 'Scene.fxml'.";
         assert txtRisultato != null : "fx:id=\"txtRisultato\" was not injected: check your FXML file 'Scene.fxml'.";
 
     }
     
     public void setModel(Model model) {
-    	this.model = model;
+    	this.model=model;
     }
-    
-    
 }

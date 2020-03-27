@@ -1,13 +1,20 @@
 package it.polito.tdp.corsi.model;
 
 public class Corso {
+
 	private String codins;
-	private Integer crediti;
+	private int crediti;
 	private String nome;
-	private Integer pd;
-	
-	
-	public Corso(String codins, Integer crediti, String nome, Integer pd) {
+	private int pd;
+
+	/**
+	 * @param codins
+	 * @param crediti
+	 * @param nome
+	 * @param pd
+	 */
+	public Corso(String codins, int crediti, String nome, int pd) {
+		super();
 		this.codins = codins;
 		this.crediti = crediti;
 		this.nome = nome;
@@ -24,33 +31,27 @@ public class Corso {
 		this.codins = codins;
 	}
 
-
-	public Integer getCrediti() {
+	public int getCrediti() {
 		return crediti;
 	}
 
-
-	public void setCrediti(Integer crediti) {
+	public void setCrediti(int crediti) {
 		this.crediti = crediti;
 	}
-
 
 	public String getNome() {
 		return nome;
 	}
 
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-
-	public Integer getPd() {
+	public int getPd() {
 		return pd;
 	}
 
-
-	public void setPd(Integer pd) {
+	public void setPd(int pd) {
 		this.pd = pd;
 	}
 
@@ -88,6 +89,5 @@ public class Corso {
 	}
 	
 	
-	
-	
+
 }
