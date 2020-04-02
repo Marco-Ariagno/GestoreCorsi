@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import it.polito.tdp.corsi.model.Corso;
 import it.polito.tdp.corsi.model.Model;
+import it.polito.tdp.corsi.model.Studente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -92,11 +93,29 @@ public class FXMLController {
 
     @FXML
     void stampaDivisione(ActionEvent event) {
-
+    	String codins=txtCorso.getText();
+    	Map<String,Integer> statistiche=this.model.getDivisioneCDS(new Corso(codins,0,null,0));
+    	for(String cds:statistiche.keySet()) {
+    		txtRisultato.appendText(cds+" "+statistiche.get(cds)+"\n");
+    	}
     }
 
     @FXML
     void stampaStudenti(ActionEvent event) {
+    	txtRisultato.clear(); 
+    	String codins=txtCorso.getText();
+    	if(!this.model.esisteCorso(codins)) {
+    		txtRisultato.appendText("Il corso non esiste\n");
+    		return;
+    	}
+    	List<Studente> studenti=model.getStudentiByCorso(new Corso(codins,0,null,0));
+    	if(studenti.size()==0) {
+    		txtRisultato.appendText("Il corso non ha studenti iscritti");
+    		return;
+    	}
+    	for(Studente s:studenti) {
+    		txtRisultato.appendText(s.toString()+"\n");
+    	}
     }
 
     @FXML
